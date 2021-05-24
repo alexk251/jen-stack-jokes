@@ -37,6 +37,26 @@ let jokes = [
 // serve back static files
 app.use(express.static('server/public'));
 
+// post route from ajax post method
+app.post('/jokes', (req,res) =>{
+  console.log(req.body);
+  //push new joke object to the array of jokes
+  jokes.push(req.body);
+  //send a created status as a response
+  res.sendStatus(201);
+})
+
+
+
+// get route from ajax get method
+app.get('/jokes', (req, res) => {
+  console.log('got to /jokes');
+
+
+
+  res.send(jokes);
+})
+
 app.listen(PORT, () => {
   console.log('server running on: ', PORT);
 }); // end spin up server
