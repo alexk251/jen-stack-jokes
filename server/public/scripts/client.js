@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 console.log('client.js sourced');
 
 $( document ).ready( onReady );
@@ -15,9 +17,16 @@ function getJokes() {
         url:'/jokes'
     }).then(function (response)){
         console.log(response)
-        
+
         //empty DOM
         $('#outputDiv').empty();
+
+        //append DOM
+        for (let joke of response) {
+        $('#outputDiv').append(`
+        <p>Joke by:${joke.whoseJoke}Question:${joke.jokeQuestion}PunchLine:${joke.punchLine}</p>
+        `);
+        }
 
 
     }
